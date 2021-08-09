@@ -1,0 +1,50 @@
+juc下  #rt.jar 下 java.util.concurrent 下
+    锁(locks):Lock,Condition,ReadWriteLock   //接口
+        LockSupport(工具类全是静态方法):part(Object blocker)//暂停当前线程 unpark(Thread thread)//回复当前线程 参数是另一个线程
+    原子类(atomic):AtomicInteger,...
+    线程池(Executor):Future,Callable,Executor
+    工具类
+        信号量三组工具类:CountDownLatch,CyclicBarrier,Semaphore
+    集合类
+        并发集合类:CopyOnWriteList,ConcurrentHashMap
+
+-----------------------------------------------------------------------
+为什么需要显示的Lock
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

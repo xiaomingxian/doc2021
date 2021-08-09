@@ -1,0 +1,12 @@
+首先得在git上创建分组， 创建项目名称。
+
+1、打开Terminal终端
+2、切换到你的本地项目目录
+3、初始化本地仓库   git init
+4、添加文件到本地仓库 git  add .
+5、提交文件   git commit -m "First commit"
+6、添加远程仓库地址到本地仓库  (先到远程仓库的页面上,复制仓库地址)  例如 http://192.168.110.53/com.pica.cloud.base.hospital/pica-cloud-hospital.git
+    git remote add origin http://192.168.110.53/com.pica.cloud.base.hospital/pica-cloud-hospital.git
+    git remote -v
+7、push到远程仓库   git push -u origin master
+参考 https://blog.csdn.net/dujianxiong/article/details/78991166

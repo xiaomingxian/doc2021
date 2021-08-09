@@ -1,0 +1,34 @@
+Spring Boot 通过@EnableAutoConfiguration开启自动装配，
+通过 SpringFactoriesLoader 最终加载META-INF/spring.factories中的自动配置类实现自动装配，
+自动配置类其实就是通过@Conditional按需加载的配置类，想要其生效必须引入spring-boot-starter-xxx包实现起步依赖
+Spring Factories
+
+@AutoConfigureAfter
+@AutoConfigureBefore
+@AutoconfigureOrder(2)
+@AutoconfigureOrder(3)
+@AutoconfigureOrder(...)
+
+
+鲨凋：什么是IOC
+    依赖反转控制，主要有
+        依赖查找
+        依赖注入
+            构造器注入
+            setter注入
+    eg:javaBeans是一个实现
+
+
+996：依赖注入和依赖查找有什么区别
+    依赖查找是主动或手动的依赖查找方式，通常需要依赖容器或标准API实现
+    而依赖注入则是手动或自动依赖绑定方式，无需依赖特定容器和API
+
+劝退：spring作为IOC容器有什么优势
+    典型的IOC管理，依赖查找和依赖注入
+    AOP抽象
+    事物抽象
+    事件机制
+    SPI扩展
+    强大的第三方整合
+    好测试
+    更好的面向对象

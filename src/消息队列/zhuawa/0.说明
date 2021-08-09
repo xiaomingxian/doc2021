@@ -1,0 +1,9 @@
+broker已经吧topic信息给到了NameServer
+
+consumer 每隔30s
+
+事物(好文章) https://blog.csdn.net/daijiguo/article/details/89059963
+
+有序 https://www.zhihu.com/question/30195969
+
+存储 queue(偏移量,大小,tag) + commitLog(物理)

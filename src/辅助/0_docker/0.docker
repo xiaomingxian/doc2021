@@ -1,0 +1,90 @@
+安装:https://www.cnblogs.com/kingsonfu/p/11576797.html
+
+运行:https://blog.csdn.net/k393393/article/details/91349849?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522159488879119195265923690%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=159488879119195265923690&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-3-91349849.pc_ecpm_v3_pc_rank_v3&utm_term=docker+%E5%AE%89%E8%A3%85rabbitmq+
+
+docker ui:https://www.cnblogs.com/frankdeng/p/9686735.html
+
+服务挂了重启:https://blog.csdn.net/iw1210/article/details/84674936
+
+容器与虚拟机本质区别及虚拟化技术分级:https://blog.csdn.net/z530234020/article/details/101018450
+
+
+docker run -d -p 15672:15672  -p  5672:5672  -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin --name rabbitmq --hostname=rabbitmqhostone   --restart always rabbitmq:latest
+
+------------------------------------------------------------------------------------------------------------------------
+启动参数:
+     --restart always #重启docker后自动重启
+
+     rabbitmq  docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 --restart=always -e TZ="Asia/Shanghai" -v /etc/localtime:/etc/localtime -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin  48565b
+        docker 启动rabbithmq后外部无法访问
+        docker exec -it fb7a78201d31 /bin/bash
+        在容器里执行命令rabbitmq-plugins enable rabbitmq_management   即开启web界面管理插件
+
+     postgis:  docker run --name=postgres -p 15432:5432 -e POSTGRES_PASSWORD=postgres -e TZ=PRC -d postgres
+
+     zk:  docker run -d  --name some-zookeeper -p 2181:2181 --restart always 镜像id
+
+     dockerui: docker run -d --name portainerUI -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock --restart always portainer/portainer
+            密码 admin_docker
+
+
+    docker run -d --name portainer -p 9000:9000 --restart=always -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
+
+
+
+-----------命令:
+docker [OPTIONS] COMMAND [arg...]
+docker images digests # 摘要信息 全id   docker images digests --no-trunc #镜像id与digests合并
+docker inspect id # 查看详情
+docker search 名称|eg:hadoop
+    docker search hadoop -s 100 点赞数不少于100的镜像
+    docker search hadoop --no-trunc 完整信息
+docker rmi -f(强制可选) name1/id1  name2/id2 ...
+    docker rmi -f ${docker images -q}  #批量删除查出的镜像
+
+
+==========================  学习内容  ==========================
+安装默认位置:/etc/docker
+基本组成：
+    镜像(模版)
+    容器(实例)
+    仓库(集中存放镜像):公开/私有仓库
+
+centos版本: unmame -r 或者 cat /etc/red...
+
+
+///////////从仓库拉镜像到本地 --> 运行 -->看效果
+
+仓库:dockerhub  aliyun 网易云    镜像加速
+
+-------------------------- 容器命令  ---------------------------
+base:
+    -i 可交互
+    -t 伪终端
+    -P 随机端口
+    -p -p 主机端口:对外容器端口
+    docker  ps -n 3 #上三次运行的容器
+    -q 只显示容器编号(id)
+    -l 显示最近创建的容器
+    -a 显示所有容器
+    --no-trunc 不断截输出内容
+    exit 离开并关闭容器 [出门关灯]
+    ctrl + p + q 临时退出 [出门不关灯]
+    docker start 容器id #第一次启动用run 后来用starts
+    docker stop 容器id #停止容器
+    docker kill 容器di #强制停止
+    docker rm 容器id #删除容器    -f 强制删除
+    docker rmi 镜像id #删除镜像   -f 强制删除
+    docker rm -f ${docker ps -aq}  #删除所有容器  ${}内的为查出所有容器id
+    docker ps -aq | xargs docker rm #删除所有容器 将查出来的id作为参数进行传递
+进阶
+    docker run -d 容器id #后台启动
+    docker logs -tf --tail 100 容器id  #查看最新的100条  -t显示时间 -f最新 --tail 100只看100条在底部拼接显示
+    查看容器内的进程：docker top 容器id
+    查看容器内的细节：docker inspect 容器id
+    docker attach 容器id #进入容器 进入之后可以进行一系列操作 例如docker容器是centos进去之后可以 cd/ls/ll/cp ...
+    docker exec -t 容器id(假设是个centos) ls -l /tmp #exec运行  进入虚拟机读取目录返回给宿主机
+    数据拷贝(容器->主机):docker cp 容器id:容器内路径 主机路径
+    进入容器交互：
+        sudo docker ps
+        $ sudo docker exec -it 775c7c9ee1e1 /bin/bash

@@ -1,0 +1,104 @@
+### 安装部署
+
+**# jdk 安装 **
+
+```
+// 查看java目录
+> /usr/libexec/java_home -V   
+/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home
+/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home
+
+将
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home
+export PATH=$JAVA_HOME/bin:$PATH
+写入到：
+vim ~/.bash_profile   vim /etc/profile
+使其生效
+source ~/.bash_profile
+
+
+
+```
+
+
+
+**#下载 **
+
+```
+http://rocketmq.apache.org/release_notes/release-notes-4.3.0/
+```
+
+**#解压**
+
+```
+> cd /Users/vking/tools
+> unzip rocketmq-all-4.3.0-bin-release.zip
+```
+
+**#启动nameserver**
+
+```
+> cd /Users/vking/tools/rocketmq-all-4.3.0-bin-release
+> nohup sh ./bin/mqnamesrv &   //启动 nameserver
+> tail -f ~/logs/rocketmqlogs/namesrv.log   //查看启动日志
+
+localhost:9876 
+```
+
+**#启动broker**
+
+```
+> cd /Users/vking/tools/rocketmq-all-4.3.0-bin-release
+
+> nohup sh ./bin/mqbroker -n localhost:9876 &    //启动broker
+
+>tail -f ~/logs/rocketmqlogs/broker.log     //查看broker 启动日志
+
+localhost:10911
+```
+
+**# 验证 是否启动**
+
+```
+jps -lv
+```
+
+
+
+
+
+`> cd /Users/vking/tools/rocketmq-all-4.3.0-bin-release`
+
+**#创建topic**
+
+```
+./bin/mqadmin updateTopic -n localhost:9876 -b localhost:10911 -t tx-mq-TOPIC11
+```
+
+**#查看消费者列表**
+
+```
+sh ./bin/mqadmin consumerProgress -n localhost:9876
+```
+
+**#查看所有主题**
+
+##### `./bin/mqadmin topicList -n localhost:9876`
+
+**#删除指定 topic**
+
+###### `sh ./bin/mqadmin deleteTopic -n localhost:9876 -c DefaultCluster -t 主题名称`
+
+**#查看某个topic的cluster【topicClusterList】**
+
+###### `./bin/mqadmin topicClusterList -n localhost:9876 -t TopicTest`
+
+**#查看有哪些命令可用**
+
+##### `sh ./bin/mqadmin`
+
+**#查看某个命令的详细参数**
+
+###### `sh ./bin/mqadmin help (命令代码，如：updateTopic)`
+
+

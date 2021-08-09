@@ -1,0 +1,23 @@
+-- 能链集团
+-- A系统每天有很多人登录，有一个登录(login)记录表，简况如下:
+--  	id	 	user_id	 	date
+--  	1	 	2	 	2020-10-12
+--  	2	 	3	 	2020-10-12
+--  	3	 	2	 	2020-10-13
+--  	4	 	1	 	2020-10-13
+--  	第1行表示user_id为2的用户在 2020-10-12 登录了A系统；
+--  	第4行表示user_id为1的用户在 2020-10-13 登录了A系统。
+--  	还有一个用户(user)表，简况如下:
+--  	id	 	user_id	 	user_name
+--  	1	 	1	 	Li Lei
+--  	2	 	2	 	Han Meimei
+--  	3	 	3	 	Jim Green
+--  	第1行表示user_id为1的用户其user_name为”Li Lei“。
+--  	请你写出一个sql语句查询登录次数超过1次的用户，以及该用户的最近登录日期，并且查询结果按照user_name升序排序。
+--
+--
+--
+-- select  u.user_name ,l.date from user u left join (
+-- select * from
+-- (select * from login order by date desc ) ld  group by ld.user_id having count(*)>1
+-- ) login2 l on u.user_id = l.user_id order by u.user_name

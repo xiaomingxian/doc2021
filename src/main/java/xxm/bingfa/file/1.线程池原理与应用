@@ -1,0 +1,12 @@
+https://zhuanlan.zhihu.com/p/84550885
+
+线程池
+    核心线程 借(不是新建) 归还(不是销毁)
+
+    1 Excutor 执行者(任务管理器) 顶层接口
+        .execute() 无返回值 抛出的异常不可捕获
+        .submit()  有返回值 用Future封装 抛出的异常可捕获
+    2 ExcutorService 接口API
+    3 ThreadFactory 线程工厂  可批量创建
+    4 Excutors 工具类 创建线程 线程池的工厂
+
