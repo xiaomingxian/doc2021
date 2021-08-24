@@ -2,32 +2,89 @@ package xxm.bingfa.code;
 
 import xxm.springlearn.pojo.Person;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import javax.security.auth.login.Configuration;
+import java.util.*;
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
 public class TestYw {
 
-
-
-
     public static void main(String[] args) {
+//        getN(4,System.out::println);
 
-        String pattern = ".*runoob.*";
-        boolean isMatch = Pattern.matches(pattern, "aaaa");
-        System.out.println(isMatch);
+        mapTest();
+
+    }
+
+    private static void mapTest() {
+
+        HashMap<String, Object> map = new HashMap<>();
 
 
+        ArrayList<Map<String, Object>> msgs = new ArrayList<>();
+        map.put("msg", msgs);
+
+        for (int i = 0; i < 10; i++) {
+            HashMap<String, Object> data = new HashMap<>();
+
+            data.put("workId", Long.valueOf(i));
+            data.put("taskId", i + "");
+            data.put("name", "name:" + i);
+
+            msgs.add(data);
+        }
 
 
+        //解析
+        Object msg = map.get("msg");
+        if (msg instanceof List) {
+            List<Map<String, Object>> list = (List<Map<String, Object>>) msg;
 
-//        new TestYw().test();
-//武汉数据模拟
-//        wuhanDeptAndUser();
+            for (Map<String, Object> dataMap : list) {
+                String nameData = (String) dataMap.get("name");
+
+                Long wid = (Long) dataMap.get("workId");
+
+                System.out.println(nameData+"-"+wid);
+
+            }
+
+
+        }
 
 
     }
+
+
+    public static void getN(Integer n, Consumer<Integer> kont) {
+        if (n <= 1) {
+            kont.accept(n);
+
+        } else {
+
+            getN(n - 1, ret -> kont.accept(ret));
+        }
+
+    }
+
+
+//
+//    public static void main(String[] args) {
+//
+//        String pattern = ".*runoob.*";
+//        boolean isMatch = Pattern.matches(pattern, "aaaa");
+//        System.out.println(isMatch);
+//
+//
+//
+//
+//
+////        new TestYw().test();
+////武汉数据模拟
+////        wuhanDeptAndUser();
+//
+//
+//    }
 
     private static void wuhanDeptAndUser() {
         String curRank = "P4";
