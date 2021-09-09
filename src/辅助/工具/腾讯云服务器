@@ -1,5 +1,6 @@
 root root123456.
-root Mysql_root_123456
+
+Mysql root XIan934792834.
 
 #查询进程并排除自身
 ps -ef |grep redis|grep -v grep
