@@ -1,0 +1,27 @@
+/opt/jdk1.8.0_161/jre/bin/java
+
+-Djava.util.logging.config.file=/data/software/tomcat-workorder-web/conf/logging.properties
+
+-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+
+-server -Dfile.encoding=UTF-8
+
+-Xms2048m -Xmx2048m -Xmn512m -Xss512k
+
+-XX:+PrintGCDetails -XX:+PrintGCDateStamps
+
+-XX:MetaspaceSize=256M -XX:+UseG1GC
+
+-XX:ParallelGCThreads=4
+
+-verbose:gc -Xloggc:/data/logs/gc/wokorder.web-gc.log -XX:+PrintGCDetails
+
+-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/data/logs/heapdump/workorder.web.hprof
+
+-Dmode=online -Djava.security.egd=file:/dev/./urandom -Djava.endorsed.dirs=/data/software/tomcat-workorder-web/endorsed
+
+-classpath /data/software/tomcat-workorder-web/bin/bootstrap.jar:/data/software/tomcat-workorder-web/bin/tomcat-juli.jar
+
+-Dcatalina.base=/data/software/tomcat-workorder-web -Dcatalina.home=/data/software/tomcat-workorder-web
+
+-Djava.io.tmpdir=/data/software/tomcat-workorder-web/temp org.apache.catalina.startup.Bootstrap start
